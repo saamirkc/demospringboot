@@ -1,9 +1,9 @@
 package com.springproject.demo.Repository;
 
+import com.springproject.demo.domain.Books;
 import org.springframework.data.jpa.repository.JpaRepository;
 
-import java.awt.print.Book;
 
-public interface BookRepository extends JpaRepository<Book, String> {
+public interface BookRepository extends JpaRepository<Books, String> {
 
 }
