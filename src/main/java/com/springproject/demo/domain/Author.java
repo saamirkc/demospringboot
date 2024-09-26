@@ -25,7 +25,11 @@ public class Author {
     private String name;
     private Long age;
 
-    @OneToMany(mappedBy = "author", cascade = CascadeType.ALL)    //cascade = CascadeType.ALL means deleting author results in deleting all books written by author
+    @OneToMany(mappedBy = "author", cascade = CascadeType.ALL)      //cascade = CascadeType.ALL means deleting author results in deleting all books written by author
+    // mappedBy = "author" indicates change is due to author of Books only(private Author author) .
+    // so no change in table of Author
+
+    @JsonManagedReference        //Author is the parent, so use @JsonManagedReference here
     private List<Books> books = new ArrayList<>();
 
 
@@ -43,3 +47,6 @@ public class Author {
 //GenerationType.AUTO: The persistence provider (like Hibernate) selects the appropriate strategy for the specific database.
 //GenerationType.SEQUENCE: A database sequence is used to generate the primary key value. This is common in databases like PostgreSQL or Oracle.
 //GenerationType.TABLE: A separate table is used to generate the primary key values.
+
+
+
