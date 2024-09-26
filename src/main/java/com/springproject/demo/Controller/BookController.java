@@ -82,8 +82,8 @@ public class BookController {
 //    so below is the correct way for get  books by author
 
     @GetMapping("/author/{id}")
-    public List<Books>  getBooksByAuthor(@PathVariable Long id){
-        Author author =this.authorService.getAuthor(id); //retrieving authors from author id;
+    public List<Books> getBooksByAuthor(@PathVariable Long id) {
+        Author author = this.authorService.getAuthor(id); //retrieving authors from author id;
         return this.bookService.getBooksByAuthor(author);
 
     }
