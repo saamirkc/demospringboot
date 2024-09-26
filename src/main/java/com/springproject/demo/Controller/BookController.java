@@ -1,24 +1,29 @@
 package com.springproject.demo.Controller;
 
 import com.springproject.demo.ServiceMain.BookService;
+import com.springproject.demo.domain.Author;
 import com.springproject.demo.domain.Books;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import com.springproject.demo.ServiceMain.AuthorService;
 
 import java.util.List;
 
 @RestController
 @RequestMapping("/books")
 public class BookController {
-@Autowired
-private BookService bookService;
-//adding books.
-@PostMapping("/")
+    @Autowired
+    private BookService bookService;
+    @Autowired
+    private AuthorService authorService;
+
+    //adding books.
+    @PostMapping("/")
     public Books addBook(@RequestBody Books book) {
-    return this.bookService.addBook(book);
-}
+        return this.bookService.addBook(book);
+    }
 //  @RequestBody  is primarily used in RESTFul web services to convert the incoming JSON data from the request body into a Java object.
 //For egWhen a client sends an HTTP request with a JSON payload, Spring uses a message converter (like Jackson) to deserialize the JSON into a specified Java object type.
 //in short @RequestBody annotations convert JSON request sent by client to Java objects
@@ -26,7 +31,7 @@ private BookService bookService;
 //the data entered by client is saved in book object which is saved in the database.
 
 
-//getting books by isbn
+    //getting books by isbn
 //@GetMapping("/{isbn}")
 //    public Books getBook(@PathVariable String isbn) {
 //    return this.bookService.getBook(isbn);
@@ -34,17 +39,17 @@ private BookService bookService;
 //this can also be done by :
     @GetMapping("/{isbn}")
     public ResponseEntity<Books> getBook(@PathVariable String isbn) {
-    Books book=this.bookService.getBook(isbn);
-    return new ResponseEntity<>(book, HttpStatus.OK);
+        Books book = this.bookService.getBook(isbn);
+        return new ResponseEntity<>(book, HttpStatus.OK);
     }
 //    this method is more flexible as his method returns a ResponseEntity<Books>, which is a more detailed structure used to
 //    represent the entire HTTP response.
 //    and @Path variable annotations is used since we passes path which is {/isbn}.
 
-//    getting all books.
+    //    getting all books.
     @GetMapping("/")
-    public List<Books>  getAllBooks() {
-    return this.bookService.getAllBooks();
+    public List<Books> getAllBooks() {
+        return this.bookService.getAllBooks();
     }
 //here we need to any annotations because :
 // 1.for  Saving a Book (Java Object):
@@ -53,15 +58,34 @@ private BookService bookService;
 //2. Viewing a Book (Java to JSON):
 //When the frontend sends a GET request to view the book, Spring Boot converts the Java Books object back to JSON format automatically.
 
-//    deleting  book by isbn
-@DeleteMapping("/{isbn}")
+    //    deleting  book by isbn
+    @DeleteMapping("/{isbn}")
     public void deleteBook(@PathVariable String isbn) {
-    this.bookService.deleteBook(isbn);
-}
-//updating book
+        this.bookService.deleteBook(isbn);
+    }
+
+    //updating book
     @PutMapping("/")
     public Books updateBook(@RequestBody Books book) {
-    return this.bookService.updateBook(book);
+        return this.bookService.updateBook(book);
     }
-}
 
+
+    //    get books by author
+//    @GetMapping("/{id}")
+//    public List<Books> getBooksByAuthor(@PathVariable Author author) {
+//        return this.bookService.getBooksByAuthor(author);
+//    }
+//    this cant be done as in @PathVariable we have to pass datatype such as String ,Long
+//    we cant pass entire Author object that contains all types of datatype.
+
+//    so below is the correct way for get  books by author
+
+    @GetMapping("/author/{id}")
+    public List<Books>  getBooksByAuthor(@PathVariable Long id){
+        Author author =this.authorService.getAuthor(id); //retrieving authors from author id;
+        return this.bookService.getBooksByAuthor(author);
+
+    }
+
+}
