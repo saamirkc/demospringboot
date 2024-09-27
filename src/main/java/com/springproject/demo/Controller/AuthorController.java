@@ -40,7 +40,7 @@ public class AuthorController {
         return this.authorService.getAllAuthors();
     }
 
-    //    updating authors
+    //    updating
     @PutMapping("/")
     public Author updateAuthor(@RequestBody Author author) {
         return this.authorService.updateAuthor(author);
