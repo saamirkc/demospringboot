@@ -41,6 +41,9 @@ public class BookServiceImpl implements BookService {
         return this.bookRepository.findByAuthor(author);
     }
 
+//    when you pass an Author object to the getBooksByAuthor method, the underlying mechanism provided by Spring Data JPA
+//    handles the filtering based on the Author entity's primary key (typically the id).
+
     @Override
     public void deleteBook(String isbn) {
     this.bookRepository.deleteById(isbn);
