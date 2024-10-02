@@ -123,10 +123,20 @@ Purpose: This is a utility class for creating and validating JWT tokens.
 Role:
 
 generateToken(String username): Creates a JWT for a given username.
+
+
 createToken(Map<String, Object> claims, String subject): Builds the JWT with claims (optional metadata), subject (the username), issue time, and expiration time.
+
+
 validateToken(String token, String username): Checks if the token is valid by comparing the username and ensuring the token is not expired.
+
+
 extractUsername(String token): Retrieves the username from the JWT.
+
+
 isTokenExpired(String token): Checks if the JWT has expired.
+
+
 3. JwtAuthenticationFilter
 Purpose: This filter intercepts login requests to authenticate users.
 
