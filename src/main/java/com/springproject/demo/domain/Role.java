@@ -1,5 +1,6 @@
 package com.springproject.demo.domain;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
@@ -22,6 +23,7 @@ public class Role {
     private String roleName;
 
     @ManyToMany(mappedBy = "roles")
-    @JsonManagedReference
+//    @JsonManagedReference
+    @JsonIgnore
     private List<User> users=new ArrayList<>();
 }
