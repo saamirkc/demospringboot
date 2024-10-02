@@ -6,6 +6,7 @@ import com.springproject.demo.domain.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -42,4 +43,11 @@ public class UserServiceImpl implements UserService {
     public void deleteUser(Long id) {
         this.userRepository.deleteById(id);
     }
+
+    @Override
+    public List<User> getUsers() {
+        return this.userRepository.findAll();
+    }
+
+
 }
