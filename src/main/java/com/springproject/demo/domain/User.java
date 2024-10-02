@@ -34,7 +34,7 @@ public class User {
             joinColumns = @JoinColumn(name = "user_id"), // The foreign key column for User
             inverseJoinColumns = @JoinColumn(name = "role_id") // The foreign key column for Role
     )
-    @JsonBackReference
+//    @JsonBackReference
     private List<Role> roles=new ArrayList<>();
 
 }
