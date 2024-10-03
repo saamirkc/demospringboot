@@ -2,6 +2,7 @@ package com.springproject.demo.ServiceMain.ServiceMainImpl;
 
 import com.springproject.demo.Repository.UserRepository;
 import com.springproject.demo.ServiceMain.UserService;
+import com.springproject.demo.domain.Role;
 import com.springproject.demo.domain.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -48,6 +49,21 @@ public class UserServiceImpl implements UserService {
     public List<User> getUsers() {
         return this.userRepository.findAll();
     }
+
+    @Override
+    public List<User> findByRole(Role role) {
+        return this.userRepository.findByRoles(role);
+    }
+
+//    @Override
+//    public List<User> getUserByRole(String roleName) {
+//        List<User> users= this.userRepository.findByRoles_RoleName(roleName);
+//        System.out.println("Retrieved users: " + users);
+//        if(users==null){
+//            throw new RuntimeException("User does not exist");
+//        }
+//        return users;
+//    }
 
 
 }
