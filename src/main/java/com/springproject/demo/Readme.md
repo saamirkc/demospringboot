@@ -177,3 +177,9 @@ In a Spring Boot application, JWT is commonly used for securing RESTful APIs. Th
 4. Client stores the JWT and sends it with each request.
 
 5. Server validates the JWT with each request.
+
+
+
+In summary, while AuthenticationController and JwtUtils are responsible for token generation and user authentication, 
+the system requires JwtAuthenticationFilter to validate tokens on each request and JwtAuthenticationEntryPoint to manage
+unauthorized access attempts.
