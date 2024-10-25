@@ -10,6 +10,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @RestController
@@ -21,6 +22,14 @@ public class UserController {
      private RoleService roleService;
     @PostMapping("/")
     public User addUser(@RequestBody User user) {
+
+
+//        this  below 4 lines are added sp that i want profile and roles should be profile.png and NORMAL by default.
+        user.setProfile("default.png");
+        Role role = new Role();
+        role.setRoleName("NORMAL");
+        user.getRoles().add(role);
+
         return this.userService.addUser(user);
     }
     @GetMapping("/{username}")
